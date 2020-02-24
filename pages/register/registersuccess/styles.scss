@@ -1,19 +1,28 @@
 // .registration-succesful-page {}
-.container-success{
-  padding-top: 300px;
-  padding-left: 50px;
-  .head{
-      font-size: 50px;
-  }
-  .SubTitle{
-      font-size: 30px;
-      padding-bottom: -15px;
-  }
-  .ant-btn-primary {
-    color: #fff;
-    background-color: #459ec7;
-    border-color: #459ec7;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+.container-success {
+  padding-top: 50%;
+  left: 50%;
+  width: 100%;
+  .ant-result-title {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 50px;
+    line-height: 1.8;
+    text-align: center;
+}
+.ant-result-subtitle {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 30px;
+    line-height: 1.6;
+    text-align: center;
+}
+.ant-btn-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 102, 193);
+    text-shadow: rgba(0, 0, 0, 0.12) 0px -1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.043) 0px 2px 0px;
+    border-color: rgb(0, 102, 193);
+    width: 20%;
+    font-size: 20px;
+    height: 40%;
 }
 }
