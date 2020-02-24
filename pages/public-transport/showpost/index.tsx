@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/global/layout';
 import './styles.scss';
-import { Card } from 'antd';
+import { Card, Rate } from 'antd';
 import { useArticlesGetArticlesAll } from 'api/myApis';
 
 export default function FuelWise() {
@@ -24,6 +24,7 @@ export default function FuelWise() {
                   <p style={{ fontWeight: 'bold' }}>{title}</p>
                   <p> {content}</p>
                 </div>
+                <Rate />
               </Card>
             );
           })}
