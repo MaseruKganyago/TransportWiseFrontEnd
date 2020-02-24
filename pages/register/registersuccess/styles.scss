@@ -1,0 +1,19 @@
+// .registration-succesful-page {}
+.container-success{
+  padding-top: 300px;
+  padding-left: 50px;
+  .head{
+      font-size: 50px;
+  }
+  .SubTitle{
+      font-size: 30px;
+      padding-bottom: -15px;
+  }
+  .ant-btn-primary {
+    color: #fff;
+    background-color: #459ec7;
+    border-color: #459ec7;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+}
