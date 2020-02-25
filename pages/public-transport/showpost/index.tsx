@@ -1,8 +1,9 @@
 import React from 'react';
 import Layout from 'components/global/layout';
 import './styles.scss';
-import { Card, Rate } from 'antd';
+import { Tooltip, Comment, Avatar } from 'antd';
 import { useArticlesGetArticlesAll } from 'api/myApis';
+import moment from 'moment';
 
 export default function FuelWise() {
   const { data: Posts } = useArticlesGetArticlesAll({});
@@ -17,15 +18,26 @@ export default function FuelWise() {
           <hr />
           <br />
           {Posts.map(Post => {
-            const { id, title, content } = Post;
+            const { id, title, content, userName } = Post;
             return (
-              <Card>
-                <div key={id}>
-                  <p style={{ fontWeight: 'bold' }}>{title}</p>
-                  <p> {content}</p>
-                </div>
-                <Rate />
-              </Card>
+              <div key={id}>
+                <Comment
+                  //actions={actions}
+                  author={userName}
+                  avatar={<Avatar style={{ backgroundColor: '#87d068' }} icon="user" />}
+                  content={
+                    <p>
+                      <h1>{title}</h1>
+                      {content}
+                    </p>
+                  }
+                  datetime={
+                    <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+                      <span>{moment().fromNow()}</span>
+                    </Tooltip>
+                  }
+                />
+              </div>
             );
           })}
         </div>

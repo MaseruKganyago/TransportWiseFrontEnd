@@ -1303,6 +1303,9 @@
         },
         "content": {
           "type": "string"
+        },
+        "userName": {
+          "type": "string"
         }
       }
     },

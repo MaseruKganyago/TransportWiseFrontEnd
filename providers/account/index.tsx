@@ -17,6 +17,7 @@ const AccountProvider: FC<IProps> = ({ children }) => {
     loginUserHttp(payload)
       .then(data => {
         dispatch(loginUserSuccessAction(data));
+        console.log(data);
         window.location.href = 'fuel-wise';
       })
       .catch(() => {
