@@ -1,12 +1,16 @@
 import React from 'react';
 import './styles.scss';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const route = useRouter();
   function handleRoute() {
-    window.location.href = '/sign-in';
+    route.push('/sign-in');
+    //window.location.href = '/sign-in';
   }
   function handleRouteReg() {
-    window.location.href = '/register';
+    route.push('/register');
+    //window.location.href = '/register';
   }
   return (
     <div className="container">

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'components/global/layout';
 import './styles.scss';
 import { Card } from 'antd';
-import { useFuelWisesGetFuelWiseAll } from 'useApis/swag';
+import { useFuelWisesGetFuelWiseAll } from 'api/myApis';
 
 export default function FuelWise() {
   const { data: Tips } = useFuelWisesGetFuelWiseAll({});
