@@ -1,33 +1,49 @@
-import { AccountStateContext, AccountActionsContext } from './contexts';
-import React, { PropsWithChildren, FC, useContext, useReducer } from 'react';
+import { AccountStateContext, AccountActionsContext, AuthTokenStateContext } from './contexts';
+import React, { PropsWithChildren, FC, useContext, useReducer, useState, useEffect } from 'react';
 import { accountReducer } from './reducer';
-import { LoginViewModel, useAccountLogin } from 'useApis/swag';
+import { LoginViewModel, useAccountLogin } from 'api/myApis';
 import { loginUserAction, loginUserSuccessAction, loginUserErrorAction } from './actions';
+import { ACCESS_TOKEN_NAME } from 'app-constants';
+import { useRouter } from 'next/router';
+//import { Handler } from 'utils/handler';
 
 interface IProps extends PropsWithChildren<any> {}
 
 const AccountProvider: FC<IProps> = ({ children }) => {
+  const router = useRouter();
   const [state, dispatch] = useReducer(accountReducer, {});
-
+  const [authtoken, setAuthtoken] = useState(null);
   const { mutate: loginUserHttp } = useAccountLogin({});
-
+  useEffect(() => {
+    if (!authtoken) {
+      const tokenstring = localStorage.getItem(ACCESS_TOKEN_NAME);
+      const token = JSON.parse(tokenstring);
+      setAuthtoken(token);
+    } else {
+      localStorage.setItem(ACCESS_TOKEN_NAME, JSON.stringify(authtoken));
+    }
+  }, [authtoken]);
   const loginUser = (payload: LoginViewModel) => {
     dispatch(loginUserAction());
 
     loginUserHttp(payload)
       .then(data => {
+        setAuthtoken(data);
         dispatch(loginUserSuccessAction(data));
         console.log(data);
-        window.location.href = 'fuel-wise';
+        console.log('0');
+        router.push('/fuel-wise');
+        console.log('1');
       })
       .catch(() => {
         dispatch(loginUserErrorAction('Invalide Email or Password, please check your details and try again.'));
       });
   };
-
   return (
     <AccountStateContext.Provider value={state}>
-      <AccountActionsContext.Provider value={{ loginUser }}>{children}</AccountActionsContext.Provider>
+      <AccountActionsContext.Provider value={{ loginUser }}>
+        <AuthTokenStateContext.Provider value={authtoken}>{children}</AuthTokenStateContext.Provider>
+      </AccountActionsContext.Provider>
     </AccountStateContext.Provider>
   );
 };
@@ -48,4 +64,12 @@ function useAccountActions() {
   return context;
 }
 
-export { AccountProvider, useAccountState, useAccountActions };
+function useAuthToken() {
+  const context = useContext(AuthTokenStateContext);
+  if (context === undefined) {
+    throw new Error('useAccountState must be used within a CountProvider');
+  }
+  return context;
+}
+
+export { AccountProvider, useAccountState, useAccountActions, useAuthToken };

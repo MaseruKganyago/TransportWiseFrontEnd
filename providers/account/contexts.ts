@@ -1,5 +1,9 @@
-import { LoginViewModel } from 'useApis/swag';
+import { LoginViewModel } from 'api/myApis';
 import { createContext } from 'react';
+
+export interface IToken {
+  userToken: string;
+}
 
 export interface IAccountStateContext {
   isLoggingIn?: boolean;
@@ -12,5 +16,7 @@ export interface IAccountActionsContext {
 }
 
 export const AccountStateContext = createContext<IAccountStateContext>({});
+
+export const AuthTokenStateContext = createContext<IToken>(null);
 
 export const AccountActionsContext = createContext<IAccountActionsContext>({});

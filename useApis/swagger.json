@@ -1140,10 +1140,10 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": true,
+            "x-nullable": false,
             "description": "",
             "schema": {
-              "type": "file"
+              "$ref": "#/definitions/Token"
             }
           }
         }
@@ -1306,6 +1306,9 @@
         },
         "userName": {
           "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
     },
@@ -1444,6 +1447,14 @@
           "type": "string"
         },
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "Token": {
+      "type": "object",
+      "properties": {
+        "userToken": {
           "type": "string"
         }
       }

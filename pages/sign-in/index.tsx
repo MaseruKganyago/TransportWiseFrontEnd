@@ -19,6 +19,7 @@ export const Login: FC<IProps> = () => {
   const handleLoginClick = () => {
     loginUser({ email, password, rememberMe });
   };
+
   // const handleLogin = () => loginUser({ email: 'user@email.com', password: 'Password@123', rememberMe: true });
 
   return (

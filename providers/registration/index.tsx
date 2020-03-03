@@ -1,4 +1,4 @@
-import { RegisterViewModel, useAccountRegister } from '../../useApis/swag';
+import { RegisterViewModel, useAccountRegister } from 'api/myApis';
 import { FC, useReducer, useContext, PropsWithChildren } from 'react';
 import { registraionReducer } from './reducer';
 import { registerUserAction, registerUserSuccessAction, registerUserErrorAction } from './action';

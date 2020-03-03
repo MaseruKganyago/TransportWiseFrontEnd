@@ -7,6 +7,7 @@ import Head from './head';
 import { compose } from 'recompose';
 import '../../../styles/main.scss';
 import { withRouter, RouterProps } from 'next/router';
+import { ACCESS_TOKEN_NAME } from 'app-constants';
 
 const { Header, Content, Footer } = Layout;
 const MenuItem = Menu.Item;
@@ -23,6 +24,10 @@ const activeClass = 'ant-menu-item-selected';
 
 const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router, children }) => {
   const { asPath } = router;
+
+  const handleLogout = () => {
+    localStorage.removeItem(ACCESS_TOKEN_NAME);
+  };
 
   return (
     <>
@@ -54,7 +59,7 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
 
             <MenuItem key={uuid()} className={asPath === '/sign-in' ? activeClass : ''}>
               <Link href="/sign-in">
-                <a>Log out</a>
+                <a onClick={handleLogout}>Log out</a>
               </Link>
             </MenuItem>
 

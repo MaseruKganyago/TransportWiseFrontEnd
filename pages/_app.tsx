@@ -48,7 +48,7 @@ export default class Main extends App<{}, {}, IState> {
 
   render() {
     const { Component, pageProps } = this.props;
-
+    console.log('headers', this.state.headers);
     return (
       <RestfulProvider
         base={BASE_URL}

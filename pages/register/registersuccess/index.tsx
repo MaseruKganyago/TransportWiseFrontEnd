@@ -1,10 +1,13 @@
 import React from 'react';
 import './styles.scss';
 import { Button, Result } from 'antd';
+import { useRouter } from 'next/router';
 
 export default function RegistrationSuccesful() {
+  const route = useRouter();
   function handleRouteLog() {
-    window.location.href = '/sign-in';
+    route.push('/sign-in');
+    //window.location.href = '/sign-in';
   }
 
   return (

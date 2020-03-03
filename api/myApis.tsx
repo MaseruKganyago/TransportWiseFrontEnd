@@ -6,10 +6,11 @@ import { Get, GetProps, useGet, UseGetProps, Mutate, MutateProps, useMutate, Use
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export interface Articles {
-  id?: string;
+  id: string;
   title?: string;
   content?: string;
   userName?: string;
+  description?: string;
 }
 
 export interface Author {
@@ -60,6 +61,10 @@ export interface User {
   email?: string;
 }
 
+export interface Token {
+  userToken?: string;
+}
+
 export interface LoginViewModel {
   email: string;
   password: string;
@@ -73,7 +78,7 @@ export interface RegisterViewModel {
 }
 
 export interface ChangePasswordViewModel {
-  oldPassword: string;
+  oldPassword?: string;
   newPassword: string;
   confirmPassword?: string;
 }
@@ -652,10 +657,9 @@ export const AccountLogin = (props: AccountLoginProps) => (
   <Mutate<void, unknown, void, LoginViewModel> verb="POST" path={`/api/Account/Login`} {...props} />
 );
 
-export type UseAccountLoginProps = Omit<UseMutateProps<void, void, LoginViewModel>, 'path' | 'verb'>;
+export type UseAccountLoginProps = Omit<UseMutateProps<Token, void, LoginViewModel>, 'path' | 'verb'>;
 
-export const useAccountLogin = (props: UseAccountLoginProps) =>
-  useMutate<void, unknown, void, LoginViewModel>('POST', `/api/Account/Login`, props);
+export const useAccountLogin = (props: UseAccountLoginProps) => useMutate('POST', `/api/Account/Login`, props);
 
 export type AccountLogoutProps = Omit<MutateProps<void, unknown, void, void>, 'path' | 'verb'>;
 

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { RegisterViewModel } from 'useApis/swag';
+import { RegisterViewModel } from 'api/myApis';
 
 export interface IRegistrationState {
   isRegistering?: boolean;

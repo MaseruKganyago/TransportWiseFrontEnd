@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.scss';
-import { useArticlesPostArticles } from './node_modules/api/myApis';
+import { useArticlesPostArticles } from 'api/myApis';
 import TextArea from 'antd/lib/input/TextArea';
 import { Button, Form, Input } from 'antd';
 import { useRouter } from 'next/router';
