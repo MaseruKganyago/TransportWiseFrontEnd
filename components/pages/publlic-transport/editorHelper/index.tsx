@@ -8,7 +8,6 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useRouter } from 'next/router';
-import { route } from 'next/dist/next-server/server/router';
 
 const content = {
   entityMap: {},

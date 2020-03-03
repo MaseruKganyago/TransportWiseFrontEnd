@@ -1252,10 +1252,10 @@
         ],
         "responses": {
           "200": {
-            "x-nullable": true,
+            "x-nullable": false,
             "description": "",
             "schema": {
-              "type": "file"
+              "$ref": "#/definitions/TokenForget"
             }
           }
         }
@@ -1517,6 +1517,14 @@
         },
         "confirmPassword": {
           "title": "Confirm new password",
+          "type": "string"
+        }
+      }
+    },
+    "TokenForget": {
+      "type": "object",
+      "properties": {
+        "token": {
           "type": "string"
         }
       }

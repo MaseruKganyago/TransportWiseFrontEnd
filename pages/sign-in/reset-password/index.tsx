@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccountResetPassword } from 'api/myApis';
 import { Alert, Input, Button, Icon } from 'antd';
+import { useRouter } from 'next/router';
+import { FORGOT_TOKEN } from 'app-constants';
 
 export const ResetPassword = () => {
+  const route = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
-
+  const [token, setToken] = useState(null);
   const { mutate: Reset, error } = useAccountResetPassword({});
+  useEffect(() => {
+    const tokenstr = sessionStorage.getItem(FORGOT_TOKEN);
+    const holder = JSON.parse(tokenstr);
+    setToken(holder.token);
+  }, []);
 
+  console.log(token);
   const handleSubmit = () => {
-    Reset({ email, password, confirmPassword })
+    Reset({ email, password, confirmPassword, token })
       .then(response => {
         console.log(response);
-        window.location.href = '/sign-in';
+        route.push('/sign-in');
       })
       .catch(err => console.log(err.response));
   };
