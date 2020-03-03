@@ -3,17 +3,20 @@ import { useAccountForgotPassword } from 'api/myApis';
 import { Input, Alert } from 'antd';
 import { Button } from 'antd';
 import './styles.scss';
+import { useRouter } from 'next/router';
+import { FORGOT_TOKEN } from 'app-constants';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-
+  const route = useRouter();
   const { mutate: passEmail, error } = useAccountForgotPassword({});
 
   const handleSubmit = () => {
     passEmail({ email })
       .then(response => {
         console.log(response);
-        window.location.href = './reset-password';
+        sessionStorage.setItem(FORGOT_TOKEN, JSON.stringify(response));
+        route.push('/reset-password');
       })
       .catch(err => console.log(err.response));
   };

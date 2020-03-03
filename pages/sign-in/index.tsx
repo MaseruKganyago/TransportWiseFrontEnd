@@ -1,8 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useAccountState, useAccountActions } from 'providers/account';
 import { Button, Alert, Form, Input, Icon, Checkbox } from 'antd';
 import './styles.scss';
 import 'antd/dist/antd.css';
+import { USER_NAME } from 'app-constants';
 
 interface IProps {
   readonly form?: any;
@@ -11,15 +12,20 @@ interface IProps {
 export const Login: FC<IProps> = () => {
   const { isLoggingIn, loginUserError } = useAccountState();
   const { loginUser } = useAccountActions();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  useEffect(() => {
+    const username = localStorage.getItem(USER_NAME);
+    setEmail(username);
+  }, []);
 
   const handleLoginClick = () => {
+    if (rememberMe) {
+      localStorage.setItem(USER_NAME, email);
+    }
     loginUser({ email, password, rememberMe });
   };
-
   // const handleLogin = () => loginUser({ email: 'user@email.com', password: 'Password@123', rememberMe: true });
 
   return (
