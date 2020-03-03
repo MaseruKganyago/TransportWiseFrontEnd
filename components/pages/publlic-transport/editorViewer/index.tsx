@@ -11,7 +11,6 @@ export default function EditViewer() {
   const [state, setState] = useState(false);
 
   const handleModal = () => {
-    console.log('1');
     setState(!state);
   };
 

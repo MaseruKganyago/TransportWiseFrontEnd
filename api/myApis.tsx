@@ -78,7 +78,7 @@ export interface RegisterViewModel {
 }
 
 export interface ChangePasswordViewModel {
-  oldPassword: string;
+  oldPassword?: string;
   newPassword: string;
   confirmPassword?: string;
 }

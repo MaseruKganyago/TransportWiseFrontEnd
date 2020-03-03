@@ -14,6 +14,15 @@ const AccountProvider: FC<IProps> = ({ children }) => {
   const [state, dispatch] = useReducer(accountReducer, {});
   const [authtoken, setAuthtoken] = useState(null);
   const { mutate: loginUserHttp } = useAccountLogin({});
+  useEffect(() => {
+    if (!authtoken) {
+      const tokenstring = localStorage.getItem(ACCESS_TOKEN_NAME);
+      const token = JSON.parse(tokenstring);
+      setAuthtoken(token);
+    } else {
+      localStorage.setItem(ACCESS_TOKEN_NAME, JSON.stringify(authtoken));
+    }
+  }, [authtoken]);
   const loginUser = (payload: LoginViewModel) => {
     dispatch(loginUserAction());
 
@@ -22,23 +31,14 @@ const AccountProvider: FC<IProps> = ({ children }) => {
         setAuthtoken(data);
         dispatch(loginUserSuccessAction(data));
         console.log(data);
+        console.log('0');
         router.push('/fuel-wise');
+        console.log('1');
       })
       .catch(() => {
         dispatch(loginUserErrorAction('Invalide Email or Password, please check your details and try again.'));
       });
   };
-
-  useEffect(() => {
-    if (!authtoken) {
-      const tokenstring = sessionStorage.getItem(ACCESS_TOKEN_NAME);
-      const token = JSON.parse(tokenstring);
-      setAuthtoken(token);
-    } else {
-      sessionStorage.setItem(ACCESS_TOKEN_NAME, JSON.stringify(authtoken));
-    }
-  }, [authtoken]);
-
   return (
     <AccountStateContext.Provider value={state}>
       <AccountActionsContext.Provider value={{ loginUser }}>
@@ -64,4 +64,12 @@ function useAccountActions() {
   return context;
 }
 
-export { AccountProvider, useAccountState, useAccountActions };
+function useAuthToken() {
+  const context = useContext(AuthTokenStateContext);
+  if (context === undefined) {
+    throw new Error('useAccountState must be used within a CountProvider');
+  }
+  return context;
+}
+
+export { AccountProvider, useAccountState, useAccountActions, useAuthToken };
