@@ -9,9 +9,14 @@ import moment from 'moment';
 export default function EditViewer() {
   const { data: Posts } = useArticlesGetArticlesAll({});
   const [state, setState] = useState(false);
+  const [head, setHead] = useState('');
+  const [news, setNews] = useState(null);
 
-  const handleModal = () => {
+  const handleModal = (title, data) => {
+    console.log('data', data);
     setState(!state);
+    setHead(title);
+    setNews(data);
   };
 
   const handleCancel = () => {
@@ -23,6 +28,7 @@ export default function EditViewer() {
   };
 
   const convertCommentFromJSONToHTML = content => {
+    if (content == null) return null;
     return stateToHTML(convertFromRaw(JSON.parse(content)));
   };
 
@@ -31,6 +37,7 @@ export default function EditViewer() {
       <div>
         {Posts.map(Post => {
           const { id, title, description, content: data, userName } = Post;
+
           return (
             <div key={id}>
               <Comment
@@ -40,7 +47,7 @@ export default function EditViewer() {
                 content={
                   <p>
                     <h3>
-                      <a onClick={handleModal}>{title}</a>
+                      <a onClick={() => handleModal(title, data)}>{title}</a>
                     </h3>
                     <p>{description}</p>
                   </p>
@@ -51,18 +58,18 @@ export default function EditViewer() {
                   </Tooltip>
                 }
               />
-              <Modal visible={state} title={title} onCancel={handleCancel} onOk={handleOk}>
-                <p>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: convertCommentFromJSONToHTML(data),
-                    }}
-                  ></div>
-                </p>
-              </Modal>
             </div>
           );
-        })}{' '}
+        })}
+        <Modal visible={state} title={head} onCancel={handleCancel} onOk={handleOk}>
+          <p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: convertCommentFromJSONToHTML(news),
+              }}
+            ></div>
+          </p>
+        </Modal>
       </div>
     )
   );

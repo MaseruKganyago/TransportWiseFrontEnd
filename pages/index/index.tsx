@@ -2,6 +2,7 @@ import React from 'react';
 import './styles.scss';
 import { useRouter } from 'next/router';
 import { ACCESS_TOKEN_NAME } from 'app-constants';
+import { message } from 'antd';
 
 export default function Home() {
   const route = useRouter();
@@ -12,9 +13,9 @@ export default function Home() {
 
     if (token) {
       route.push('/fuel-wise');
+      message.success('Automatically succesfully Logged In');
     } else {
       route.push('/sign-in');
-      //window.location.href = '/sign-in';
     }
   }
   function handleRouteReg() {
