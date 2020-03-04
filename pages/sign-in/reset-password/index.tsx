@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAccountResetPassword } from 'api/myApis';
-import { Alert, Input, Button, Icon } from 'antd';
+import { Alert, Input, Button, Icon, message } from 'antd';
 import { useRouter } from 'next/router';
 import { FORGOT_TOKEN } from 'app-constants';
 
 export const ResetPassword = () => {
+  //message.warning('You are about to reset your password.')
   const route = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +24,7 @@ export const ResetPassword = () => {
       .then(response => {
         console.log(response);
         route.push('/sign-in');
+        message.success('Password succesfully reseted, use new password to login');
       })
       .catch(err => console.log(err.response));
   };

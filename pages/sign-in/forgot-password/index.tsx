@@ -16,7 +16,7 @@ export const ForgotPassword = () => {
       .then(response => {
         console.log(response);
         sessionStorage.setItem(FORGOT_TOKEN, JSON.stringify(response));
-        route.push('/reset-password');
+        route.push('/sign-in/reset-password');
       })
       .catch(err => console.log(err.response));
   };

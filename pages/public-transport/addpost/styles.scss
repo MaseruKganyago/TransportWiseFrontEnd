@@ -1,1 +1,57 @@
-// .addpost-page {}
+.title {
+  margin: '24px 0';
+  width: '30%';
+
+  .ant-input:placeholder-shown {
+    text-overflow: ellipsis;
+    width: 25%;
+  }
+  .ant-input{
+    width: 30%;
+  }
+}
+
+.description {
+  margin: '24px 0';
+  width: '30%';
+
+  .ant-input:placeholder-shown {
+    text-overflow: ellipsis;
+    width: 25%;
+  }
+  .ant-input{
+    width: 60%;
+  }
+}
+
+.nameHolder {
+  margin: '24px 0';
+  width: '10%';
+
+  .ant-input:placeholder-shown {
+    text-overflow: ellipsis;
+    width: 27%;
+  }
+  .ant-input{
+    width: 30%;
+  }
+}
+
+.Editor {
+  margin: '24px 0';
+  width: '60%';
+
+  .ant-card-body {
+    padding: 20px;
+    zoom: 0;
+    height: 120px;
+  }
+}
+
+.buttons {
+  margin: '24px 0';
+  width: '30%';
+  .ant-btn-block {
+    width: 25%;
+  }
+}

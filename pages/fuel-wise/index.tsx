@@ -6,7 +6,6 @@ import { useFuelWisesGetFuelWiseAll } from 'api/myApis';
 
 export default function FuelWise() {
   const { data: Tips } = useFuelWisesGetFuelWiseAll({});
-
   return (
     Tips && (
       <Layout title="FuelWise" description="This is the FuelWisePage">
