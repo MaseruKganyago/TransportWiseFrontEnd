@@ -96,7 +96,7 @@ export const EditorHelper = () => {
               editorClassName="demo-editor"
               onEditorStateChange={onEditorStateChange}
             /> */}
-            <p className="writing">Use the button below to write your post.</p>
+            <p className="writing">Click the button below, so to write your post.</p>
             <Button type="primary" onClick={showModal}>
               Click button to write your
             </Button>

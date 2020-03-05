@@ -34,6 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     "googleMap/regionPolygon.ts",
-    "components/global/fullcalendar/index.js"
+    "components/global/fullcalendar/index.js",
+    "components/global/layout/index.tsx"
   ]
 }

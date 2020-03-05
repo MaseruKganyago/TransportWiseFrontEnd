@@ -1,14 +1,16 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Modal } from 'antd';
 import Link from 'next/link';
 import Head from './head';
 // import {CustomNProgress} from 'components';
 import { compose } from 'recompose';
 import '../../../styles/main.scss';
-import { withRouter, RouterProps } from 'next/router';
+import { withRouter, RouterProps, useRouter } from 'next/router';
 import { ACCESS_TOKEN_NAME } from 'app-constants';
+//import { QuestionCircleFill } from '@ant-design/icons';
 
+const { confirm } = Modal;
 const { Header, Content, Footer } = Layout;
 const MenuItem = Menu.Item;
 
@@ -23,10 +25,23 @@ interface Props extends React.HTMLAttributes<any> {
 const activeClass = 'ant-menu-item-selected';
 
 const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router, children }) => {
+  const routerD = useRouter();
   const { asPath } = router;
 
   const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN_NAME);
+    confirm({
+      title: 'Are you sure you want to Logout?',
+      //icon: <QuestionCircleFill />,
+      content: 'Remember to always keep it Wise on the Roads!!.',
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.1 ? resolve : reject, 10);
+          localStorage.removeItem(ACCESS_TOKEN_NAME);
+          routerD.push('/sign-in');
+        }).catch(() => console.log('Invalid'));
+      },
+      onCancel() {},
+    });
   };
 
   return (
@@ -58,9 +73,7 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
             </MenuItem>
 
             <MenuItem key={uuid()} className={asPath === '/sign-in' ? activeClass : ''}>
-              <Link href="/sign-in">
-                <a onClick={handleLogout}>Log out</a>
-              </Link>
+              <a onClick={handleLogout}>Log out</a>
             </MenuItem>
 
             {/* new-menu-item */}
