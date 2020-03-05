@@ -21,6 +21,7 @@ export const Addpost = () => {
           This is the <strong>PublicTransport</strong> add post page
         </p>
         <hr />
+        <br />
       </div>
 
       {EditorHelper && <EditorHelper />}
