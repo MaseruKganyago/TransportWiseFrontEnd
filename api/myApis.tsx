@@ -21,32 +21,11 @@ export interface Author {
   driverExperience?: string;
 }
 
-export interface Comments {
-  id: string;
-  comment?: string;
-  photo?: string;
-  articleId: string;
-  userId: string;
-}
-
-export interface FeedBack {
-  id: string;
-  authorId: string;
-  userId: string;
-  messages?: string;
-}
-
 export interface FuelWise {
   id: string;
   title?: string;
   body?: string;
   authorId: string;
-}
-
-export interface Likes {
-  id: string;
-  userId: string;
-  articleId: string;
 }
 
 export interface TipsForEveryOne {
@@ -57,8 +36,10 @@ export interface TipsForEveryOne {
 
 export interface User {
   id: string;
-  name?: string;
-  email?: string;
+  email: string;
+  name: string;
+  surname: string;
+  mobilePhone?: string;
 }
 
 export interface Token {
@@ -72,6 +53,9 @@ export interface LoginViewModel {
 }
 
 export interface RegisterViewModel {
+  name: string;
+  surname: string;
+  mobilePhone?: string;
   email: string;
   password: string;
   confirmPassword?: string;
@@ -100,17 +84,11 @@ export interface ResetPasswordViewModel {
 
 export type AuthorRequestBody = Author;
 
-export type FeedBackRequestBody = FeedBack;
-
 export type ValuesPostValueRequestBody = string;
 
 export type ArticlesRequestBody = Articles;
 
-export type CommentsRequestBody = Comments;
-
 export type FuelWiseRequestBody = FuelWise;
-
-export type LikesRequestBody = Likes;
 
 export type TipsForEveryOneRequestBody = TipsForEveryOne;
 
@@ -292,124 +270,6 @@ export type UseAuthorsDeleteAuthorProps = Omit<UseMutateProps<void, void, string
 export const useAuthorsDeleteAuthor = (props: UseAuthorsDeleteAuthorProps) =>
   useMutate<void, unknown, void, string>('DELETE', `/api/Authors`, props);
 
-export type CommentsGetCommentsAllProps = Omit<GetProps<Comments[], unknown, void>, 'path'>;
-
-export const CommentsGetCommentsAll = (props: CommentsGetCommentsAllProps) => (
-  <Get<Comments[], unknown, void> path={`/api/Comments`} {...props} />
-);
-
-export type UseCommentsGetCommentsAllProps = Omit<UseGetProps<Comments[], void>, 'path'>;
-
-export const useCommentsGetCommentsAll = (props: UseCommentsGetCommentsAllProps) =>
-  useGet<Comments[], unknown, void>(`/api/Comments`, props);
-
-export type CommentsPostCommentsProps = Omit<MutateProps<void, unknown, void, CommentsRequestBody>, 'path' | 'verb'>;
-
-export const CommentsPostComments = (props: CommentsPostCommentsProps) => (
-  <Mutate<void, unknown, void, CommentsRequestBody> verb="POST" path={`/api/Comments`} {...props} />
-);
-
-export type UseCommentsPostCommentsProps = Omit<UseMutateProps<void, void, CommentsRequestBody>, 'path' | 'verb'>;
-
-export const useCommentsPostComments = (props: UseCommentsPostCommentsProps) =>
-  useMutate<void, unknown, void, CommentsRequestBody>('POST', `/api/Comments`, props);
-
-export type CommentsGetCommentsProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
-
-export const CommentsGetComments = ({ id, ...props }: CommentsGetCommentsProps) => (
-  <Get<void, unknown, void> path={`/api/Comments/${id}`} {...props} />
-);
-
-export type UseCommentsGetCommentsProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
-
-export const useCommentsGetComments = ({ id, ...props }: UseCommentsGetCommentsProps) =>
-  useGet<void, unknown, void>(`/api/Comments/${id}`, props);
-
-export type CommentsPutCommentsProps = Omit<MutateProps<void, unknown, void, CommentsRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const CommentsPutComments = ({ id, ...props }: CommentsPutCommentsProps) => (
-  <Mutate<void, unknown, void, CommentsRequestBody> verb="PUT" path={`/api/Comments/${id}`} {...props} />
-);
-
-export type UseCommentsPutCommentsProps = Omit<UseMutateProps<void, void, CommentsRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const useCommentsPutComments = ({ id, ...props }: UseCommentsPutCommentsProps) =>
-  useMutate<void, unknown, void, CommentsRequestBody>('PUT', `/api/Comments/${id}`, props);
-
-export type CommentsDeleteCommentsProps = Omit<MutateProps<void, unknown, void, string>, 'path' | 'verb'>;
-
-export const CommentsDeleteComments = (props: CommentsDeleteCommentsProps) => (
-  <Mutate<void, unknown, void, string> verb="DELETE" path={`/api/Comments`} {...props} />
-);
-
-export type UseCommentsDeleteCommentsProps = Omit<UseMutateProps<void, void, string>, 'path' | 'verb'>;
-
-export const useCommentsDeleteComments = (props: UseCommentsDeleteCommentsProps) =>
-  useMutate<void, unknown, void, string>('DELETE', `/api/Comments`, props);
-
-export type FeedBacksGetFeedBackAllProps = Omit<GetProps<FeedBack[], unknown, void>, 'path'>;
-
-export const FeedBacksGetFeedBackAll = (props: FeedBacksGetFeedBackAllProps) => (
-  <Get<FeedBack[], unknown, void> path={`/api/FeedBacks`} {...props} />
-);
-
-export type UseFeedBacksGetFeedBackAllProps = Omit<UseGetProps<FeedBack[], void>, 'path'>;
-
-export const useFeedBacksGetFeedBackAll = (props: UseFeedBacksGetFeedBackAllProps) =>
-  useGet<FeedBack[], unknown, void>(`/api/FeedBacks`, props);
-
-export type FeedBacksPostFeedBackProps = Omit<MutateProps<void, unknown, void, FeedBackRequestBody>, 'path' | 'verb'>;
-
-export const FeedBacksPostFeedBack = (props: FeedBacksPostFeedBackProps) => (
-  <Mutate<void, unknown, void, FeedBackRequestBody> verb="POST" path={`/api/FeedBacks`} {...props} />
-);
-
-export type UseFeedBacksPostFeedBackProps = Omit<UseMutateProps<void, void, FeedBackRequestBody>, 'path' | 'verb'>;
-
-export const useFeedBacksPostFeedBack = (props: UseFeedBacksPostFeedBackProps) =>
-  useMutate<void, unknown, void, FeedBackRequestBody>('POST', `/api/FeedBacks`, props);
-
-export type FeedBacksGetFeedBackProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
-
-export const FeedBacksGetFeedBack = ({ id, ...props }: FeedBacksGetFeedBackProps) => (
-  <Get<void, unknown, void> path={`/api/FeedBacks/${id}`} {...props} />
-);
-
-export type UseFeedBacksGetFeedBackProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
-
-export const useFeedBacksGetFeedBack = ({ id, ...props }: UseFeedBacksGetFeedBackProps) =>
-  useGet<void, unknown, void>(`/api/FeedBacks/${id}`, props);
-
-export type FeedBacksPutFeedBackProps = Omit<MutateProps<void, unknown, void, FeedBackRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const FeedBacksPutFeedBack = ({ id, ...props }: FeedBacksPutFeedBackProps) => (
-  <Mutate<void, unknown, void, FeedBackRequestBody> verb="PUT" path={`/api/FeedBacks/${id}`} {...props} />
-);
-
-export type UseFeedBacksPutFeedBackProps = Omit<UseMutateProps<void, void, FeedBackRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const useFeedBacksPutFeedBack = ({ id, ...props }: UseFeedBacksPutFeedBackProps) =>
-  useMutate<void, unknown, void, FeedBackRequestBody>('PUT', `/api/FeedBacks/${id}`, props);
-
-export type FeedBacksDeleteFeedBackProps = Omit<MutateProps<void, unknown, void, string>, 'path' | 'verb'>;
-
-export const FeedBacksDeleteFeedBack = (props: FeedBacksDeleteFeedBackProps) => (
-  <Mutate<void, unknown, void, string> verb="DELETE" path={`/api/FeedBacks`} {...props} />
-);
-
-export type UseFeedBacksDeleteFeedBackProps = Omit<UseMutateProps<void, void, string>, 'path' | 'verb'>;
-
-export const useFeedBacksDeleteFeedBack = (props: UseFeedBacksDeleteFeedBackProps) =>
-  useMutate<void, unknown, void, string>('DELETE', `/api/FeedBacks`, props);
-
 export type FuelWisesGetFuelWiseAllProps = Omit<GetProps<FuelWise[], unknown, void>, 'path'>;
 
 export const FuelWisesGetFuelWiseAll = (props: FuelWisesGetFuelWiseAllProps) => (
@@ -468,65 +328,6 @@ export type UseFuelWisesDeleteFuelWiseProps = Omit<UseMutateProps<void, void, st
 
 export const useFuelWisesDeleteFuelWise = (props: UseFuelWisesDeleteFuelWiseProps) =>
   useMutate<void, unknown, void, string>('DELETE', `/api/FuelWises`, props);
-
-export type LikesGetLikesAllProps = Omit<GetProps<Likes[], unknown, void>, 'path'>;
-
-export const LikesGetLikesAll = (props: LikesGetLikesAllProps) => (
-  <Get<Likes[], unknown, void> path={`/api/Likes`} {...props} />
-);
-
-export type UseLikesGetLikesAllProps = Omit<UseGetProps<Likes[], void>, 'path'>;
-
-export const useLikesGetLikesAll = (props: UseLikesGetLikesAllProps) =>
-  useGet<Likes[], unknown, void>(`/api/Likes`, props);
-
-export type LikesPostLikesProps = Omit<MutateProps<void, unknown, void, LikesRequestBody>, 'path' | 'verb'>;
-
-export const LikesPostLikes = (props: LikesPostLikesProps) => (
-  <Mutate<void, unknown, void, LikesRequestBody> verb="POST" path={`/api/Likes`} {...props} />
-);
-
-export type UseLikesPostLikesProps = Omit<UseMutateProps<void, void, LikesRequestBody>, 'path' | 'verb'>;
-
-export const useLikesPostLikes = (props: UseLikesPostLikesProps) =>
-  useMutate<void, unknown, void, LikesRequestBody>('POST', `/api/Likes`, props);
-
-export type LikesGetLikesProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
-
-export const LikesGetLikes = ({ id, ...props }: LikesGetLikesProps) => (
-  <Get<void, unknown, void> path={`/api/Likes/${id}`} {...props} />
-);
-
-export type UseLikesGetLikesProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
-
-export const useLikesGetLikes = ({ id, ...props }: UseLikesGetLikesProps) =>
-  useGet<void, unknown, void>(`/api/Likes/${id}`, props);
-
-export type LikesPutLikesProps = Omit<MutateProps<void, unknown, void, LikesRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const LikesPutLikes = ({ id, ...props }: LikesPutLikesProps) => (
-  <Mutate<void, unknown, void, LikesRequestBody> verb="PUT" path={`/api/Likes/${id}`} {...props} />
-);
-
-export type UseLikesPutLikesProps = Omit<UseMutateProps<void, void, LikesRequestBody>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const useLikesPutLikes = ({ id, ...props }: UseLikesPutLikesProps) =>
-  useMutate<void, unknown, void, LikesRequestBody>('PUT', `/api/Likes/${id}`, props);
-
-export type LikesDeleteLikesProps = Omit<MutateProps<void, unknown, void, string>, 'path' | 'verb'>;
-
-export const LikesDeleteLikes = (props: LikesDeleteLikesProps) => (
-  <Mutate<void, unknown, void, string> verb="DELETE" path={`/api/Likes`} {...props} />
-);
-
-export type UseLikesDeleteLikesProps = Omit<UseMutateProps<void, void, string>, 'path' | 'verb'>;
-
-export const useLikesDeleteLikes = (props: UseLikesDeleteLikesProps) =>
-  useMutate<void, unknown, void, string>('DELETE', `/api/Likes`, props);
 
 export type TipsForEveryOnesGetTipsForEveryOneAllProps = Omit<GetProps<TipsForEveryOne[], unknown, void>, 'path'>;
 

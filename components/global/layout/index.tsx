@@ -1,14 +1,14 @@
-import React from 'react';
 import uuid from 'uuid/v4';
-import { Layout, Menu, Modal } from 'antd';
+import { Layout, Menu, Modal, Dropdown, Icon } from 'antd';
 import Link from 'next/link';
 import Head from './head';
 // import {CustomNProgress} from 'components';
 import { compose } from 'recompose';
-import '../../../styles/main.scss';
+//import '../../../styles/main.scss';
 import { withRouter, RouterProps, useRouter } from 'next/router';
 import { ACCESS_TOKEN_NAME } from 'app-constants';
-//import { QuestionCircleFill } from '@ant-design/icons';
+import { useAuthToken } from 'providers/account';
+//   import { UserOutline, DoubleLeftOutline } from '@ant-design/icons';
 
 const { confirm } = Modal;
 const { Header, Content, Footer } = Layout;
@@ -25,6 +25,9 @@ interface Props extends React.HTMLAttributes<any> {
 const activeClass = 'ant-menu-item-selected';
 
 const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router, children }) => {
+  const { userToken } = useAuthToken();
+  const user = userToken && userToken.userInfo;
+  console.log('useToken', userToken);
   const routerD = useRouter();
   const { asPath } = router;
 
@@ -44,6 +47,20 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
     });
   };
 
+  const menuBotton = (
+    <Menu>
+      <Menu.Item key="1">
+        <Icon type="setting" />
+        Update Details
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={handleLogout}>
+          <Icon type="poweroff" />
+          Logout
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       {/* <CustomNProgress /> */}
@@ -72,10 +89,14 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
               </Link>
             </MenuItem>
 
-            <MenuItem key={uuid()} className={asPath === '/sign-in' ? activeClass : ''}>
+            {/*  <MenuItem key={uuid()} className={asPath === '/sign-in' ? activeClass : ''}>
               <a onClick={handleLogout}>Log out</a>
-            </MenuItem>
-
+            </MenuItem> */}
+            {user && (
+              <Dropdown.Button overlay={menuBotton} size={'large'} icon={<Icon type="user" />}>
+                {`TransportWise: ${user.name} ${user.surname}`}
+              </Dropdown.Button>
+            )}
             {/* new-menu-item */}
           </Menu>
         </Header>

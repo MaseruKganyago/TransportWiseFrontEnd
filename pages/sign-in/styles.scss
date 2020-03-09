@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin: auto;
   //position: relative;
   z-index: 99;
 
@@ -36,10 +36,15 @@
       font-family: 'Open Sans', sans-serif;
       font-weight: 900;
     }
+    .ant-form-item-control{
+
+      width: 400px;
+
     .ant-input-affix-wrapper .ant-input:not(:last-child) {
       padding-right: 83px;
-      width: 150px;
+      width: 400px;
     }
+  }
     .custom-form-item {
       display: flex;
       justify-content: space-between;
