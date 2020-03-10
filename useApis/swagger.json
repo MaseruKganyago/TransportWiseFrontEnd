@@ -816,6 +816,33 @@
         }
       }
     },
+    "/api/Account/UpdateUser": {
+      "post": {
+        "tags": ["Account"],
+        "operationId": "Account_EditUser",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUser"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/api/Account/Password": {
       "put": {
         "tags": ["Account"],
@@ -1084,6 +1111,94 @@
         "confirmPassword": {
           "title": "Confirm password",
           "type": "string"
+        }
+      }
+    },
+    "ApplicationUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityUser"
+        },
+        {
+          "type": "object",
+          "required": ["name", "surname"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "surname": {
+              "type": "string",
+              "minLength": 1
+            },
+            "mobilePhone": {
+              "type": "string",
+              "format": "phone"
+            }
+          }
+        }
+      ]
+    },
+    "IdentityUser": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityUserOfString"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "IdentityUserOfString": {
+      "type": "object",
+      "required": ["emailConfirmed", "phoneNumberConfirmed", "twoFactorEnabled", "lockoutEnabled", "accessFailedCount"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "normalizedUserName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "normalizedEmail": {
+          "type": "string"
+        },
+        "emailConfirmed": {
+          "type": "boolean"
+        },
+        "passwordHash": {
+          "type": "string"
+        },
+        "securityStamp": {
+          "type": "string"
+        },
+        "concurrencyStamp": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "phoneNumberConfirmed": {
+          "type": "boolean"
+        },
+        "twoFactorEnabled": {
+          "type": "boolean"
+        },
+        "lockoutEnd": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lockoutEnabled": {
+          "type": "boolean"
+        },
+        "accessFailedCount": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

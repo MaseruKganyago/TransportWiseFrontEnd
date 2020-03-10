@@ -61,6 +61,32 @@ export interface RegisterViewModel {
   confirmPassword?: string;
 }
 
+export type ApplicationUser = IdentityUser & {
+  name: string;
+  surname: string;
+  mobilePhone?: string;
+};
+
+export type IdentityUser = IdentityUserOfString & { [key: string]: any };
+
+export interface IdentityUserOfString {
+  id?: string;
+  userName?: string;
+  normalizedUserName?: string;
+  email?: string;
+  normalizedEmail?: string;
+  emailConfirmed?: boolean;
+  passwordHash?: string;
+  securityStamp?: string;
+  concurrencyStamp?: string;
+  phoneNumber?: string;
+  phoneNumberConfirmed?: boolean;
+  twoFactorEnabled?: boolean;
+  lockoutEnd?: string;
+  lockoutEnabled?: boolean;
+  accessFailedCount?: number;
+}
+
 export interface ChangePasswordViewModel {
   oldPassword: string;
   newPassword: string;
@@ -488,6 +514,17 @@ export type UseAccountRegisterProps = Omit<UseMutateProps<void, void, RegisterVi
 
 export const useAccountRegister = (props: UseAccountRegisterProps) =>
   useMutate<void, unknown, void, RegisterViewModel>('POST', `/api/Account/Register`, props);
+
+export type AccountEditUserProps = Omit<MutateProps<void, unknown, void, ApplicationUser>, 'path' | 'verb'>;
+
+export const AccountEditUser = (props: AccountEditUserProps) => (
+  <Mutate<void, unknown, void, ApplicationUser> verb="POST" path={`/api/Account/UpdateUser`} {...props} />
+);
+
+export type UseAccountEditUserProps = Omit<UseMutateProps<void, void, ApplicationUser>, 'path' | 'verb'>;
+
+export const useAccountEditUser = (props: UseAccountEditUserProps) =>
+  useMutate<void, unknown, void, ApplicationUser>('POST', `/api/Account/UpdateUser`, props);
 
 export type AccountChangePasswordProps = Omit<
   MutateProps<void, unknown, void, ChangePasswordViewModel>,
