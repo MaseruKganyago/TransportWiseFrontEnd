@@ -2,7 +2,7 @@ import { LoginViewModel } from 'api/myApis';
 import { createContext } from 'react';
 
 export interface IToken {
-  userToken: string;
+  userToken?: any;
 }
 
 export interface IAccountStateContext {
@@ -17,6 +17,6 @@ export interface IAccountActionsContext {
 
 export const AccountStateContext = createContext<IAccountStateContext>({});
 
-export const AuthTokenStateContext = createContext<IToken>(null);
+export const AuthTokenStateContext = createContext<IToken>({});
 
 export const AccountActionsContext = createContext<IAccountActionsContext>({});

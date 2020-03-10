@@ -8,13 +8,15 @@ import { useState } from 'react';
 export const Register = () => {
   const { isRegistering, isRegisterError } = useRegistrationState();
   const { registerUser } = useRegistrationActions();
-
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [mobilePhone, setMobile] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
 
   const handleSubmit = () => {
-    registerUser({ email, password, confirmPassword });
+    registerUser({ name, surname, mobilePhone, email, password, confirmPassword });
   };
 
   return (
@@ -38,6 +40,28 @@ export const Register = () => {
 
         <Form>
           <FormItem>
+            <Input placeholder="Enter your Name" required value={name} onChange={e => setName(e.target.value)} />
+          </FormItem>
+
+          <FormItem>
+            <Input
+              placeholder="Enter your Surname"
+              required
+              value={surname}
+              onChange={e => setSurname(e.target.value)}
+            />
+          </FormItem>
+
+          <FormItem>
+            <Input
+              placeholder="Enter your CellPhone number (Optional)"
+              required
+              value={mobilePhone}
+              onChange={e => setMobile(e.target.value)}
+            />
+          </FormItem>
+
+          <FormItem>
             <Input
               prefix={<Icon type="mail" />}
               placeholder="Enter Email"
@@ -48,7 +72,7 @@ export const Register = () => {
           </FormItem>
 
           <FormItem>
-            <Input
+            <Input.Password
               autoComplete="on"
               prefix={<Icon type="lock" />}
               placeholder="Password"
@@ -60,7 +84,7 @@ export const Register = () => {
           </FormItem>
 
           <FormItem>
-            <Input
+            <Input.Password
               autoComplete="on"
               prefix={<Icon type="lock" />}
               placeholder="Confirm Password"

@@ -1,42 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.scss';
-import { Tooltip, Comment, Avatar, Modal } from 'antd';
-import { stateToHTML } from 'draft-js-export-html';
-import { convertFromRaw } from 'draft-js';
+import { Tooltip, Comment, Avatar } from 'antd';
+
 import { useArticlesGetArticlesAll } from 'api/myApis';
 import moment from 'moment';
+import Link from 'next/link';
 
 export default function EditViewer() {
   const { data: Posts } = useArticlesGetArticlesAll({});
-  const [state, setState] = useState(false);
-  const [head, setHead] = useState('');
-  const [news, setNews] = useState(null);
-
-  const handleModal = (title, data) => {
-    console.log('data', data);
-    setState(!state);
-    setHead(title);
-    setNews(data);
-  };
-
-  const handleCancel = () => {
-    setState(!state);
-  };
-
-  const handleOk = () => {
-    setState(!state);
-  };
-
-  const convertCommentFromJSONToHTML = content => {
-    if (content == null) return null;
-    return stateToHTML(convertFromRaw(JSON.parse(content)));
-  };
 
   return (
     Posts && (
       <div>
         {Posts.map(Post => {
-          const { id, title, description, content: data, userName } = Post;
+          const { id, title, description, userName } = Post;
 
           return (
             <div key={id}>
@@ -47,7 +24,9 @@ export default function EditViewer() {
                 content={
                   <p>
                     <h3>
-                      <a onClick={() => handleModal(title, data)}>{title}</a>
+                      <Link href={`/public-transport/showpost/details?id=${id}`}>
+                        <a>{title}</a>
+                      </Link>
                     </h3>
                     <p>{description}</p>
                   </p>
@@ -61,15 +40,6 @@ export default function EditViewer() {
             </div>
           );
         })}
-        <Modal visible={state} title={head} onCancel={handleCancel} onOk={handleOk}>
-          <p>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: convertCommentFromJSONToHTML(news),
-              }}
-            ></div>
-          </p>
-        </Modal>
       </div>
     )
   );

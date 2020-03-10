@@ -1,38 +1,37 @@
-import React from 'react';
-import Layout from 'components/layouts/main/index';
+import React, { useEffect } from 'react';
+import Layout from 'components/global/layout';
 import './styles.scss';
+import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import dynamic from 'next/dynamic';
 import { Button } from 'antd';
+import { useRouter } from 'next/router';
 
-export default function PublicTransport() {
+let EditorViewer;
+
+export default function ShowPost() {
+  useEffect(() => {
+    EditorViewer = dynamic(() => import('components/pages/publlic-transport/editorViewer'));
+  }, []);
+
+  const route = useRouter();
+
   function handleRouteAdd() {
-    window.location.href = 'public-transport/addpost';
+    route.push('/public-transport/addpost');
   }
 
-  function handleRouteShow() {
-    window.location.href = 'public-transport/showpost';
-  }
   return (
-    <Layout title="PublicTransport" description="This is the PublicTransport Page">
-      <div className="public-transport-page">
+    <Layout title="FuelWise" description="This is the FuelWisePage">
+      <div className="Poster">
         <p className="writing">
           This is the <strong>PublicTransport</strong> page
+          <Button type="primary" onClick={handleRouteAdd}>
+            Add a new Post
+          </Button>
         </p>
         <hr />
         <br />
-        <p className="writing2">
-          Click below to add a <strong>Post</strong>:
-        </p>
-        <Button type="primary" onClick={handleRouteAdd}>
-          Add a Post
-        </Button>
-        <br /> <br /> <br />
-        <p className="writing2">
-          Click below to view <strong>Posts</strong>:
-        </p>
-        <Button type="primary" onClick={handleRouteShow}>
-          View Posts
-        </Button>
       </div>
+      {EditorViewer && <EditorViewer />}
     </Layout>
   );
 }

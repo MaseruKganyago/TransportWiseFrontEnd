@@ -7,6 +7,7 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useRouter } from 'next/router';
+import { useAuthToken } from 'providers/account';
 
 const content = {
   entityMap: {},
@@ -24,19 +25,22 @@ const content = {
 };
 
 export const EditorHelper = () => {
+  const { userToken } = useAuthToken();
   const router = useRouter();
   const [title, setTitle] = useState('');
   //const [content, setContent] = useState('');
-  const [userName, setUsername] = useState('');
   const { mutate: addPost } = useArticlesPostArticles({});
   const [description, setDescription] = useState('');
   const [state, setState] = useState(false);
   const [editorState, setEditorState] = useState(EditorState.createWithContent(convertFromRaw(content)));
 
+  const userName = `${userToken.userInfo.name} ${userToken.userInfo.surname}`;
+
   const handleSubmit = () => {
+    console.log('name', userName);
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     // ContentState.createFromBlockArray(JSON.parse(text));
-    message.loading('Adding Post....', 2.5);
+    message.loading('Adding Post....', 1.3);
     addPost({ title, userName, content, description })
       .then(response => {
         console.log(response);
@@ -50,6 +54,7 @@ export const EditorHelper = () => {
       })
       .catch(err => console.log(err.response));
   };
+  console.log('name2', userName);
   const handleCancel = () => {
     router.push('/public-transport');
   };
@@ -123,14 +128,6 @@ export const EditorHelper = () => {
               onEditorStateChange={onEditorStateChange}
             />
           </Modal>
-        </div>
-        <br />
-        <div className="nameHolder">
-          <Input
-            placeholder=" Enter Your Name to be revieled with the post. (Optional)"
-            value={userName}
-            onChange={e => setUsername(e.target.value)}
-          />
         </div>
       </div>
       <br />
