@@ -49,7 +49,7 @@ export const Login: FC<IProps> = () => {
           </Form.Item>
 
           <Form.Item>
-            <Input.Password
+            <Input
               autoComplete="on"
               prefix={<Icon type="lock" />}
               placeholder="Password"
@@ -71,7 +71,7 @@ export const Login: FC<IProps> = () => {
               onClick={handleLoginClick}
               loading={isLoggingIn}
             >
-              {isLoggingIn ? 'Loging in....' : 'Log In'}
+              {isLoggingIn ? 'Loging in....' : 'LogIn'}
             </Button>
             <div className="oneLine">
               <a className="login-form-forgot" href="sign-in/forgot-password">

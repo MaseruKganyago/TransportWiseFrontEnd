@@ -10,18 +10,14 @@ main {
   padding-bottom: 112px;
 }
 .header {
-  font-size: 50px;
-  padding-top: 10px;
-  // padding-left: 42%;
+  font-size: 24px;
   font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .header2 {
   font-size: 15px;
   font-style: oblique;
-  padding-bottom: 7px;
-  //padding-left: 42.5%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .title {
   font-weight: normal;
@@ -53,23 +49,6 @@ main {
     height: 64px;
     padding: 0 50px;
     line-height: 64px;
-    background: rgb(74, 143, 221);
-    .ant-menu-horizontal {
-      line-height: 46px;
-      white-space: nowrap;
-      border-radius: 5px;
-      border-bottom: 1px solid #e8e8e8;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      .ant-btn-group {
-        position: relative;
-        display: inline-block;
-        left: 770px;
-
-        .anticon {
-          padding-right: 7px;
-        }
-      }
-    }
-  }
+    background:rgb(74, 143, 221);
+}
 }

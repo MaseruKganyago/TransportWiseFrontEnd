@@ -36,7 +36,7 @@
     "@zeit/next-source-maps": "0.0.3",
     "abort-controller": "^3.0.0",
     "acorn": "^6.1.1",
-    "antd": "^3.26.12",
+    "antd": "^3.26.9",
     "axios": "^0.18.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

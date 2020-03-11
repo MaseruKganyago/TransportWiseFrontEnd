@@ -39,11 +39,10 @@ const AccountProvider: FC<IProps> = ({ children }) => {
         dispatch(loginUserErrorAction('Invalide Email or Password, please check your details and try again.'));
       });
   };
-  console.log('authToken', authtoken);
   return (
     <AccountStateContext.Provider value={state}>
       <AccountActionsContext.Provider value={{ loginUser }}>
-        <AuthTokenStateContext.Provider value={{ userToken: authtoken }}>{children}</AuthTokenStateContext.Provider>
+        <AuthTokenStateContext.Provider value={authtoken}>{children}</AuthTokenStateContext.Provider>
       </AccountActionsContext.Provider>
     </AccountStateContext.Provider>
   );
