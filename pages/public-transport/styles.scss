@@ -1,15 +1,16 @@
 // .public-transport-page {}
 
-.Poster {
-  .ant-btn-primary {
-    left: 900px;
+.Wrapper {
+  .header {
+    display: flex;
+    border-bottom: 1px solid #00000021;
+    margin-bottom: 15px;
+    .writing {
+      font-size: 16px;
+      font-family: 'Open Sans', sans-serif;
+      flex: 1;
+    }
   }
-
-  .writing {
-    font-size: 24px;
-    font-family: 'Open Sans', sans-serif;
-  }
-
   .writing2 {
     font-size: 22px;
     font-family: 'Open Sans', sans-serif;

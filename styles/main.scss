@@ -4,23 +4,25 @@
 @import 'select';
 
 // Main Styles
+.box{
+  width: 100%;
 main {
-  min-height: 100vh;
   padding-top: 91px;
+  width: 100%;
   padding-bottom: 112px;
 }
 .header {
   font-size: 50px;
   padding-top: 10px;
-  // padding-left: 42%;
+  padding-left: 42px;
   font-weight: bold;
   font-family: 'Open Sans', sans-serif;
 }
 .header2 {
-  font-size: 15px;
+  font-size: 24px;
   font-style: oblique;
   padding-bottom: 7px;
-  //padding-left: 42.5%;
+  padding-left: 75px;
   font-family: 'Open Sans', sans-serif;
 }
 .title {
@@ -31,6 +33,7 @@ main {
 #__next {
   display: flex;
   height: 100vh;
+  width: 100%;
 }
 
 .layout {
@@ -43,7 +46,7 @@ main {
   .content-body {
     background: #fff;
     padding: 24px;
-    height: 70vh;
+    height: auto;
   }
 
   .ant-layout-footer {
@@ -61,10 +64,13 @@ main {
       border-bottom: 1px solid #e8e8e8;
       -webkit-box-shadow: none;
       box-shadow: none;
+      .dropdown{
+        margin-left: auto;
+        border-bottom: none !important;
       .ant-btn-group {
         position: relative;
         display: inline-block;
-        left: 770px;
+      }
 
         .anticon {
           padding-right: 7px;
@@ -72,4 +78,5 @@ main {
       }
     }
   }
+}
 }

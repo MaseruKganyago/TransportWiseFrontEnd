@@ -1,80 +1,76 @@
 import { useState } from 'react';
-import { Drawer, Form, Row, Col, Input, Button } from 'antd';
-import { useAccountEditUser } from 'api/myApis';
+import { useImagesSetProfile } from 'api/myApis';
+import { message, Icon, Upload, Button } from 'antd';
 import { useAuthToken } from 'providers/account';
 
-const updateUser = () => {
-  const [state, setState] = useState(false);
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [mobilePhone, setMobilePhone] = useState('');
-  const { mutate: Update } = useAccountEditUser({});
+export const UserProfile = () => {
+  const [state, setState] = useState({ loading: false, stateUrl: '', stateView: '' });
+  const [typePic, setType] = useState();
+  const { mutate: HandleFile } = useImagesSetProfile({});
   const { userToken } = useAuthToken();
-  const user = userToken.userInfo;
-  const { id } = user;
+  console.log('userTokenCheck', userToken);
+  const user = userToken && userToken.userInfo;
+  console.log('user', user);
 
-  const showDrawer = () => {
-    setState(!state);
+  const beforeUpload = file => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    } else setType(file.type);
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
   };
 
-  const onClose = () => {
-    setState(!state);
+  const getBase64 = (img: Blob, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
   };
 
-  const onSubmit = () => {
-    Update({ id, name, surname, mobilePhone })
-      .then(response => console.log(response))
-      .catch(err => console.log(err));
-    setState(!state);
+  const handleChange = info => {
+    if (info.file.status === 'uploading') {
+      setState({ loading: true, stateUrl: '', stateView: '' });
+      return;
+    } else if (info.file.status === 'done') {
+      getBase64(info.file.originFileObj, imageUrl => {
+        setState({ loading: false, stateUrl: imageUrl.substr(23), stateView: imageUrl });
+        console.log('imageEncoded', imageUrl);
+      });
+    }
   };
 
+  const uploadButton = (
+    <div>
+      <Icon type={state.loading ? 'loading' : 'plus'} />
+      <div className="ant-upload-text">Upload</div>
+    </div>
+  );
+  console.log('showId', user.id);
+  const handleSubmit = () => {
+    HandleFile({ id: user.id, name: user.name, data: state.stateUrl, type: typePic })
+      .then(() => alert('Profile image Succesfully set, Ready to update user details.'))
+      .catch(err => console.log('err', err));
+  };
+  console.log(typePic);
   return (
-    <div className="drawer">
-      <Drawer
-        title="Create a new account"
-        width={720}
-        onClose={this.onClose}
-        visible={this.state.visible}
-        bodyStyle={{ paddingBottom: 80 }}
+    <div className="Upload">
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
       >
-        <Form layout="vertical" hideRequiredMark>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="Name">
-                <Input placeholder="Please enter your name" value={name} onChange={e => setName(e.target.value)} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="surname">
-                <Input
-                  placeholder="Please enter your surname"
-                  value={surname}
-                  onChange={e => setSurname(e.target.value)}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="MobileNumber">
-                <Input
-                  placeholder="Please enter your Mobile Number"
-                  value={mobilePhone}
-                  onChange={e => setMobilePhone(e.target.value)}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-        <div className="buttons">
-          <Button onClick={onClose} style={{ marginRight: 8 }}>
-            Cancel
-          </Button>
-          <Button onClick={onSubmit} type="primary">
-            Submit
-          </Button>
-        </div>
-      </Drawer>
+        {state.stateView ? <img src={state.stateView} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+      </Upload>
+      <Button type="primary" onClick={handleSubmit}>
+        Set Profile
+      </Button>
     </div>
   );
 };
-
-export default updateUser;
