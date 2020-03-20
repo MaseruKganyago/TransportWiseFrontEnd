@@ -15,3 +15,16 @@ export const requestHeaders = (): { [key: string]: string } => {
   }
   return headers;
 };
+
+export const getToken = () => {
+  const Tokenstr = localStorage.getItem(ACCESS_TOKEN_NAME);
+  let token;
+
+  if (Tokenstr) {
+    console.log('tokenReq', Tokenstr);
+    const Token = JSON.parse(Tokenstr);
+    token = Token.userToken;
+    //window.location.href = "/fuel-wise"
+  }
+  return token;
+};
