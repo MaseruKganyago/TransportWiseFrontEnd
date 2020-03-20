@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import Layout from 'components/global/layout';
 import './styles.scss';
 import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -8,7 +8,7 @@ let EditorHelper;
 // const EditorHelper = React.lazy(() => import('components/pages/publlic-transport/editorHelper'));
 
 export const Addpost = () => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     EditorHelper = dynamic(() => import('components/pages/publlic-transport/editorHelper'));
 
     console.log('EditorHelper', EditorHelper);

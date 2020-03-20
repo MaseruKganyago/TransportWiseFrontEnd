@@ -19,7 +19,7 @@ export default function EditViewer() {
         {Posts.map(Post => {
           const { id, title, description, userName, image } = Post;
           {
-            console.log('userName', userName);
+            console.log('userName', image);
           }
           return (
             <div key={id}>
