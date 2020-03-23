@@ -12,6 +12,8 @@ export const REGISTER = '/register';
 
 export const ABOUT = '/about';
 
+export const REGISTER_SUCCESS = '/register/registersuccess';
+
 export const ORDER_DETAILS_PAGE_URL = '/order-details';
 
 export const CHANGE_PASSWORD_PAGE_URL = '/account/change-password';

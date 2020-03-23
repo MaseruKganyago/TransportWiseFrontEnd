@@ -4,11 +4,28 @@ import { Input, Alert, notification } from 'antd';
 import { Button } from 'antd';
 import './styles.scss';
 import { FORGOT_TOKEN } from 'app-constants';
-//import emailjs from "emailjs-com";
+import emailjs from 'emailjs-com';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { mutate: passEmail, error } = useAccountForgotPassword({});
+
+  const Mail = () => {
+    var template_params = {
+      userEmail: email,
+    };
+
+    var user_id = 'user_kfsDOlaoXDiqjfc8CBkCV';
+    var service_id = 'mail_sender';
+    var template_id = 'transportwise';
+    emailjs
+      .send(service_id, template_id, template_params, user_id)
+      .then(res => {
+        console.log('Email successfully sent!', res);
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err));
+  };
 
   const openNotification = () => {
     notification.open({
@@ -27,7 +44,7 @@ export const ForgotPassword = () => {
       .then(response => {
         console.log(response);
         localStorage.setItem(FORGOT_TOKEN, JSON.stringify(response));
-        //Mail();
+        Mail();
         openNotification();
       })
       .catch(err => console.log(err.response));

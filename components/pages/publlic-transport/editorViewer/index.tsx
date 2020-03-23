@@ -1,8 +1,7 @@
 import React from 'react';
 import './styles.scss';
-import { Tooltip, Comment, Avatar } from 'antd';
+import { Comment, Avatar } from 'antd';
 import { useArticlesGetArticlesAll } from 'api/myApis';
-import moment from 'moment';
 import Link from 'next/link';
 import { useAuthToken } from 'providers/account';
 
@@ -41,11 +40,6 @@ export default function EditViewer() {
                     </h3>
                     <p>{description}</p>
                   </p>
-                }
-                datetime={
-                  <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-                    <span>{moment().fromNow()}</span>
-                  </Tooltip>
                 }
               />
             </div>
