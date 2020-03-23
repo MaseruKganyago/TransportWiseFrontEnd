@@ -4,6 +4,7 @@ import { registraionReducer } from './reducer';
 import { registerUserAction, registerUserSuccessAction, registerUserErrorAction } from './action';
 import { RegistrationStateContext, RegistrationActionsContext } from 'contexts/contexts';
 import { useRouter } from 'next/router';
+import { REGISTER_SUCCESS } from 'routes';
 
 interface IProps extends PropsWithChildren<any> {}
 
@@ -18,7 +19,7 @@ const ReigsterProvider: FC<IProps> = ({ children }) => {
     registerUserHttp(payload)
       .then(data => {
         dispatch(registerUserSuccessAction(data));
-        router.push('/register/registersuccess');
+        router.push(REGISTER_SUCCESS);
       })
       .catch(() => {
         dispatch(registerUserErrorAction('Invalid Registration'));
