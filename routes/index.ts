@@ -1,5 +1,17 @@
 import { INavLink } from 'models';
 
+export const SIGN_IN = '/sign-in';
+
+export const FUEL_WISE = '/fuel-wise';
+
+export const ADD_POST = '/public-transport/addpost';
+
+export const PUBLIC_TRANSPORT = '/public-transport';
+
+export const REGISTER = '/register';
+
+export const ABOUT = '/about';
+
 export const ORDER_DETAILS_PAGE_URL = '/order-details';
 
 export const CHANGE_PASSWORD_PAGE_URL = '/account/change-password';
@@ -65,48 +77,48 @@ export const appRoutes: INavLink[] = [
     icon: 'idcard',
     displayName: 'Users',
     linkTo: USERS_INDEX_URL,
-    permissionName: USERS_PERMISSION
+    permissionName: USERS_PERMISSION,
   },
   {
     name: TEAMS_INDEX_URL,
     icon: 'team',
     displayName: 'Teams',
     linkTo: TEAMS_INDEX_URL,
-    permissionName: TEAMS_PERMISSION
+    permissionName: TEAMS_PERMISSION,
   },
   {
     name: PROJECTS_INDEX_URL,
     icon: 'project',
     displayName: 'Projects',
     linkTo: PROJECTS_INDEX_URL,
-    permissionName: PROJECTS_PERMISSION
+    permissionName: PROJECTS_PERMISSION,
   },
   {
     name: AREAS_INDEX_URL,
     icon: 'gateway',
     displayName: 'Areas',
     linkTo: AREAS_INDEX_URL,
-    permissionName: AREAS_PERMISSION
+    permissionName: AREAS_PERMISSION,
   },
   {
     name: INSPECTION_ASSIGNMENTS_INDEX_URL,
     icon: 'solution',
     displayName: 'Inspection Assignments',
     linkTo: INSPECTION_ASSIGNMENTS_INDEX_URL,
-    permissionName: INSPECTION_ASSIGNMENTS_PERMISSION
+    permissionName: INSPECTION_ASSIGNMENTS_PERMISSION,
   },
   {
     name: INSPECTIONS_INDEX_URL,
     icon: 'monitor',
     displayName: 'Inspections',
     linkTo: INSPECTIONS_INDEX_URL,
-    permissionName: INSPECTIONS_PERMISSION
+    permissionName: INSPECTIONS_PERMISSION,
   },
   {
     name: ROLES_INDEX_URL,
     icon: 'apartment',
     displayName: 'Roles',
     linkTo: ROLES_INDEX_URL,
-    permissionName: ROLES_PERMISSION
-  }, 
+    permissionName: ROLES_PERMISSION,
+  },
 ];

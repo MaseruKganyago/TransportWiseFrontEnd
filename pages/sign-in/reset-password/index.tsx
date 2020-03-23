@@ -3,6 +3,7 @@ import { useAccountResetPassword } from 'api/myApis';
 import { Alert, Input, Button, Icon, message } from 'antd';
 import { useRouter } from 'next/router';
 import { FORGOT_TOKEN } from 'app-constants';
+import { SIGN_IN } from 'routes';
 
 export const ResetPassword = () => {
   //message.warning('You are about to reset your password.')
@@ -23,7 +24,7 @@ export const ResetPassword = () => {
     Reset({ email, password, confirmPassword, token })
       .then(response => {
         console.log(response);
-        route.push('/sign-in');
+        route.push(SIGN_IN);
         localStorage.removeItem(FORGOT_TOKEN);
         message.success('Password succesfully reseted, use new password to login');
       })

@@ -3,6 +3,7 @@ import './styles.scss';
 import { useRouter } from 'next/router';
 import { ACCESS_TOKEN_NAME } from 'app-constants';
 import { message } from 'antd';
+import { SIGN_IN, REGISTER, FUEL_WISE } from 'routes';
 
 export default function Home() {
   const route = useRouter();
@@ -12,14 +13,14 @@ export default function Home() {
     const token = JSON.parse(tokenstr);
 
     if (token) {
-      route.push('/fuel-wise');
+      route.push(FUEL_WISE);
       message.success('Automatically succesfully Logged In');
     } else {
-      route.push('/sign-in');
+      route.push(SIGN_IN);
     }
   }
   function handleRouteReg() {
-    route.push('/register');
+    route.push(REGISTER);
     //window.location.href = '/register';
   }
   return (
