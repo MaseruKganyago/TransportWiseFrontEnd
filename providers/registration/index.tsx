@@ -3,12 +3,13 @@ import { FC, useReducer, useContext, PropsWithChildren } from 'react';
 import { registraionReducer } from './reducer';
 import { registerUserAction, registerUserSuccessAction, registerUserErrorAction } from './action';
 import { RegistrationStateContext, RegistrationActionsContext } from 'contexts/contexts';
+import { useRouter } from 'next/router';
 
 interface IProps extends PropsWithChildren<any> {}
 
 const ReigsterProvider: FC<IProps> = ({ children }) => {
   const [state, dispatch] = useReducer(registraionReducer, {});
-
+  const router = useRouter();
   const { mutate: registerUserHttp } = useAccountRegister({});
 
   const registerUser = (payload: RegisterViewModel) => {
@@ -17,7 +18,7 @@ const ReigsterProvider: FC<IProps> = ({ children }) => {
     registerUserHttp(payload)
       .then(data => {
         dispatch(registerUserSuccessAction(data));
-        window.location.href = 'register/registersuccess';
+        router.push('/register/registersuccess');
       })
       .catch(() => {
         dispatch(registerUserErrorAction('Invalid Registration'));

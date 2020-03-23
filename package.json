@@ -29,6 +29,7 @@
     ]
   },
   "dependencies": {
+    "@types/nodemailer": "^6.4.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
@@ -56,6 +57,7 @@
     "dotenv": "^6.2.0",
     "draft-js-export-html": "^1.4.1",
     "duration": "^0.2.2",
+    "emailjs-com": "^2.4.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
@@ -85,7 +87,7 @@
     "next-redux-saga": "^3.0.0",
     "next-redux-wrapper": "^3.0.0-alpha.0",
     "next-runtime-dotenv": "^1.0.1",
-    "nodemailer": "^6.4.3",
+    "nodemailer": "^6.4.5",
     "npm": "^6.7.0",
     "nprogress": "^0.2.0",
     "prettier-eslint-cli": "^4.7.1",

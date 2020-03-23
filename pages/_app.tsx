@@ -12,6 +12,7 @@ import { ReigsterProvider } from 'providers/registration';
 interface IState {
   headers: { [key: string]: string };
   tokenIsSet: boolean;
+  token: string;
 }
 
 export default class Main extends App<{}, {}, IState> {
@@ -25,6 +26,7 @@ export default class Main extends App<{}, {}, IState> {
     this.state = {
       headers: {},
       tokenIsSet: false,
+      token: '',
     };
   }
 
@@ -39,10 +41,10 @@ export default class Main extends App<{}, {}, IState> {
   }
 
   setRequestHeaders() {
-    import('utils/requestHeaders').then(({ requestHeaders }) => {
+    import('utils/requestHeaders').then(({ requestHeaders, getToken }) => {
       const headers = requestHeaders();
 
-      this.setState({ headers: requestHeaders(), tokenIsSet: !!headers.Authorization });
+      this.setState({ headers: requestHeaders(), tokenIsSet: !!headers.Authorization, token: getToken() });
     });
   }
 
@@ -51,6 +53,7 @@ export default class Main extends App<{}, {}, IState> {
     console.log('headers', this.state.headers);
     return (
       <RestfulProvider
+        queryParams={{ token: this.state.token }}
         base={BASE_URL}
         requestOptions={{
           headers: this.state.headers,

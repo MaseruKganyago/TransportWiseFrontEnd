@@ -52,7 +52,6 @@ export interface Articles {
   content?: string | null;
   userName?: string | null;
   description?: string | null;
-  image?: string | null;
 }
 
 export interface Author {
@@ -63,31 +62,11 @@ export interface Author {
   driverExperience?: string | null;
 }
 
-export interface FileStorage {
-  fileStorageId?: string;
-  name?: string | null;
-  filePath?: string | null;
-  contentType?: string | null;
-}
-
 export interface FuelWise {
   id?: string;
   title?: string | null;
   body?: string | null;
   authorId?: string;
-}
-
-export interface Encoded {
-  id?: string | null;
-  name?: string | null;
-  data?: string | null;
-  type?: string | null;
-}
-
-export interface Photo {
-  id?: string;
-  photoName?: string | null;
-  path?: string | null;
 }
 
 export interface TipsForEveryOne {
@@ -311,65 +290,6 @@ export type UseAuthorsDeleteAuthorProps = Omit<UseMutateProps<void, void, string
 export const useAuthorsDeleteAuthor = (props: UseAuthorsDeleteAuthorProps) =>
   useMutate<void, unknown, void, string>('DELETE', `/api/Authors`, props);
 
-export type FileStoragesGetFileStorageAllProps = Omit<GetProps<FileStorage[], unknown, void>, 'path'>;
-
-export const FileStoragesGetFileStorageAll = (props: FileStoragesGetFileStorageAllProps) => (
-  <Get<FileStorage[], unknown, void> path={`/api/FileStorages`} {...props} />
-);
-
-export type UseFileStoragesGetFileStorageAllProps = Omit<UseGetProps<FileStorage[], void>, 'path'>;
-
-export const useFileStoragesGetFileStorageAll = (props: UseFileStoragesGetFileStorageAllProps) =>
-  useGet<FileStorage[], unknown, void>(`/api/FileStorages`, props);
-
-export type FileStoragesPostFileStorageProps = Omit<MutateProps<void, unknown, void, FileStorage>, 'path' | 'verb'>;
-
-export const FileStoragesPostFileStorage = (props: FileStoragesPostFileStorageProps) => (
-  <Mutate<void, unknown, void, FileStorage> verb="POST" path={`/api/FileStorages`} {...props} />
-);
-
-export type UseFileStoragesPostFileStorageProps = Omit<UseMutateProps<void, void, FileStorage>, 'path' | 'verb'>;
-
-export const useFileStoragesPostFileStorage = (props: UseFileStoragesPostFileStorageProps) =>
-  useMutate<void, unknown, void, FileStorage>('POST', `/api/FileStorages`, props);
-
-export type FileStoragesGetFileStorageProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
-
-export const FileStoragesGetFileStorage = ({ id, ...props }: FileStoragesGetFileStorageProps) => (
-  <Get<void, unknown, void> path={`/api/FileStorages/${id}`} {...props} />
-);
-
-export type UseFileStoragesGetFileStorageProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
-
-export const useFileStoragesGetFileStorage = ({ id, ...props }: UseFileStoragesGetFileStorageProps) =>
-  useGet<void, unknown, void>(`/api/FileStorages/${id}`, props);
-
-export type FileStoragesPutFileStorageProps = Omit<MutateProps<void, unknown, void, FileStorage>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const FileStoragesPutFileStorage = ({ id, ...props }: FileStoragesPutFileStorageProps) => (
-  <Mutate<void, unknown, void, FileStorage> verb="PUT" path={`/api/FileStorages/${id}`} {...props} />
-);
-
-export type UseFileStoragesPutFileStorageProps = Omit<UseMutateProps<void, void, FileStorage>, 'path' | 'verb'> & {
-  id: string;
-};
-
-export const useFileStoragesPutFileStorage = ({ id, ...props }: UseFileStoragesPutFileStorageProps) =>
-  useMutate<void, unknown, void, FileStorage>('PUT', `/api/FileStorages/${id}`, props);
-
-export type FileStoragesDeleteFileStorageProps = Omit<MutateProps<void, unknown, void, string>, 'path' | 'verb'>;
-
-export const FileStoragesDeleteFileStorage = (props: FileStoragesDeleteFileStorageProps) => (
-  <Mutate<void, unknown, void, string> verb="DELETE" path={`/api/FileStorages`} {...props} />
-);
-
-export type UseFileStoragesDeleteFileStorageProps = Omit<UseMutateProps<void, void, string>, 'path' | 'verb'>;
-
-export const useFileStoragesDeleteFileStorage = (props: UseFileStoragesDeleteFileStorageProps) =>
-  useMutate<void, unknown, void, string>('DELETE', `/api/FileStorages`, props);
-
 export type FuelWisesGetFuelWiseAllProps = Omit<GetProps<FuelWise[], unknown, void>, 'path'>;
 
 export const FuelWisesGetFuelWiseAll = (props: FuelWisesGetFuelWiseAllProps) => (
@@ -427,64 +347,27 @@ export type UseFuelWisesDeleteFuelWiseProps = Omit<UseMutateProps<void, void, st
 export const useFuelWisesDeleteFuelWise = (props: UseFuelWisesDeleteFuelWiseProps) =>
   useMutate<void, unknown, void, string>('DELETE', `/api/FuelWises`, props);
 
-export type ImagesSetProfileProps = Omit<MutateProps<void, unknown, void, Encoded>, 'path' | 'verb'>;
+export type ImagesSetProfileProps = Omit<MutateProps<void, unknown, void, void>, 'path' | 'verb'>;
 
 export const ImagesSetProfile = (props: ImagesSetProfileProps) => (
-  <Mutate<void, unknown, void, Encoded> verb="POST" path={`/api/Images`} {...props} />
+  <Mutate<void, unknown, void, void> verb="POST" path={`/api/Images/Image`} {...props} />
 );
 
-export type UseImagesSetProfileProps = Omit<UseMutateProps<void, void, Encoded>, 'path' | 'verb'>;
+export type UseImagesSetProfileProps = Omit<UseMutateProps<void, void, void>, 'path' | 'verb'>;
 
 export const useImagesSetProfile = (props: UseImagesSetProfileProps) =>
-  useMutate<void, unknown, void, Encoded>('POST', `/api/Images`, props);
+  useMutate<void, unknown, void, void>('POST', `/api/Images/Image`, props);
 
-export interface ImagesGetProfileQueryParams {
-  Name?: string;
-}
+export type ImagesGetProfileProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
 
-export type ImagesGetProfileProps = Omit<GetProps<void, unknown, ImagesGetProfileQueryParams>, 'path'>;
-
-export const ImagesGetProfile = (props: ImagesGetProfileProps) => (
-  <Get<void, unknown, ImagesGetProfileQueryParams> path={`/api/Images`} {...props} />
+export const ImagesGetProfile = ({ id, ...props }: ImagesGetProfileProps) => (
+  <Get<void, unknown, void> path={`/api/Images/${id}`} {...props} />
 );
 
-export type UseImagesGetProfileProps = Omit<UseGetProps<void, ImagesGetProfileQueryParams>, 'path'>;
+export type UseImagesGetProfileProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
 
-export const useImagesGetProfile = (props: UseImagesGetProfileProps) =>
-  useGet<void, unknown, ImagesGetProfileQueryParams>(`/api/Images`, props);
-
-export type PhotosGetPhotoAllProps = Omit<GetProps<Photo[], unknown, void>, 'path'>;
-
-export const PhotosGetPhotoAll = (props: PhotosGetPhotoAllProps) => (
-  <Get<Photo[], unknown, void> path={`/api/Photos`} {...props} />
-);
-
-export type UsePhotosGetPhotoAllProps = Omit<UseGetProps<Photo[], void>, 'path'>;
-
-export const usePhotosGetPhotoAll = (props: UsePhotosGetPhotoAllProps) =>
-  useGet<Photo[], unknown, void>(`/api/Photos`, props);
-
-export type PhotosPostPhotoProps = Omit<MutateProps<void, unknown, void, Encoded>, 'path' | 'verb'>;
-
-export const PhotosPostPhoto = (props: PhotosPostPhotoProps) => (
-  <Mutate<void, unknown, void, Encoded> verb="POST" path={`/api/Photos`} {...props} />
-);
-
-export type UsePhotosPostPhotoProps = Omit<UseMutateProps<void, void, Encoded>, 'path' | 'verb'>;
-
-export const usePhotosPostPhoto = (props: UsePhotosPostPhotoProps) =>
-  useMutate<void, unknown, void, Encoded>('POST', `/api/Photos`, props);
-
-export type PhotosGetPhotoProps = Omit<GetProps<void, unknown, void>, 'path'> & { id: string };
-
-export const PhotosGetPhoto = ({ id, ...props }: PhotosGetPhotoProps) => (
-  <Get<void, unknown, void> path={`/api/Photos/${id}`} {...props} />
-);
-
-export type UsePhotosGetPhotoProps = Omit<UseGetProps<void, void>, 'path'> & { id: string };
-
-export const usePhotosGetPhoto = ({ id, ...props }: UsePhotosGetPhotoProps) =>
-  useGet<void, unknown, void>(`/api/Photos/${id}`, props);
+export const useImagesGetProfile = ({ id, ...props }: UseImagesGetProfileProps) =>
+  useGet<void, unknown, void>(`/api/Images/${id}`, props);
 
 export type TipsForEveryOnesGetTipsForEveryOneAllProps = Omit<GetProps<TipsForEveryOne[], unknown, void>, 'path'>;
 

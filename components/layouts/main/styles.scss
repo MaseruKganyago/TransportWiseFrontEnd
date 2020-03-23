@@ -10,6 +10,8 @@ $ant-menu-item: 10px;
 $body-padding: 8px;
 $header-sides-spadding: $ant-menu-item;
 
+.box{
+  width: 100%;
 .layout-container {
   @include transition;
   flex: 1;
@@ -209,4 +211,5 @@ $header-sides-spadding: $ant-menu-item;
       }
     }
   }
+}
 }

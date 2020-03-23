@@ -13,7 +13,7 @@ export const ResetPassword = () => {
   const [token, setToken] = useState(null);
   const { mutate: Reset, error } = useAccountResetPassword({});
   useEffect(() => {
-    const tokenstr = sessionStorage.getItem(FORGOT_TOKEN);
+    const tokenstr = localStorage.getItem(FORGOT_TOKEN);
     const holder = JSON.parse(tokenstr);
     setToken(holder.token);
   }, []);
@@ -24,6 +24,7 @@ export const ResetPassword = () => {
       .then(response => {
         console.log(response);
         route.push('/sign-in');
+        localStorage.removeItem(FORGOT_TOKEN);
         message.success('Password succesfully reseted, use new password to login');
       })
       .catch(err => console.log(err.response));

@@ -1,6 +1,4 @@
 //import { getAccessToken } from './auth';
-import { getLocalizationOrDefault } from './localization';
-import { getTenantId } from './multitenancy';
 import { ACCESS_TOKEN_NAME } from 'app-constants';
 
 export const requestHeaders = (): { [key: string]: string } => {
@@ -15,14 +13,18 @@ export const requestHeaders = (): { [key: string]: string } => {
     headers['Authorization'] = `Bearer ${Token.userToken}`;
     //window.location.href = "/fuel-wise"
   }
-
-  headers['.AspNetCore.Culture'] = getLocalizationOrDefault();
-
-  const tenantId = getTenantId();
-
-  if (tenantId) {
-    headers['Abp.TenantId'] = getTenantId().toString();
-  }
-  console.log('headers', headers);
   return headers;
+};
+
+export const getToken = () => {
+  const Tokenstr = localStorage.getItem(ACCESS_TOKEN_NAME);
+  let token;
+
+  if (Tokenstr) {
+    console.log('tokenReq', Tokenstr);
+    const Token = JSON.parse(Tokenstr);
+    token = Token.userToken;
+    //window.location.href = "/fuel-wise"
+  }
+  return token;
 };

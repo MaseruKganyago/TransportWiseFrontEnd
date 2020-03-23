@@ -1,22 +1,54 @@
 import React, { useState } from 'react';
 import { useAccountForgotPassword } from 'api/myApis';
-import { Input, Alert } from 'antd';
+import { Input, Alert, notification } from 'antd';
 import { Button } from 'antd';
 import './styles.scss';
-import { useRouter } from 'next/router';
 import { FORGOT_TOKEN } from 'app-constants';
+//import emailjs from "emailjs-com";
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const route = useRouter();
   const { mutate: passEmail, error } = useAccountForgotPassword({});
 
+  /* const Mail = () => {
+    var template_params = {
+      "userEmail": email
+   }
+    
+    var user_id = "user_kfsDOlaoXDiqjfc8CBkCV";
+    var service_id = "mail_sender";
+    var template_id = "transportwise";
+    emailjs.send(service_id, template_id, template_params, user_id)
+      .then(res => {
+        console.log("Email successfully sent!", res);
+      })
+      .catch(err =>
+        console.error(
+          "Oh well, you failed. Here some thoughts on the error that occured:",
+          err
+        )
+      );
+  } */
+
+  const openNotification = () => {
+    notification.open({
+      message: 'Forgot Password',
+      duration: 0,
+      description:
+        'Password Reset confirmation link has been sent to your email. Open your emails to reset your password.',
+      onClick: () => {
+        console.log('Notification Clicked!');
+      },
+    });
+  };
+
   const handleSubmit = () => {
-    passEmail({ email })
+    passEmail({ email: email })
       .then(response => {
         console.log(response);
-        sessionStorage.setItem(FORGOT_TOKEN, JSON.stringify(response));
-        route.push('/sign-in/reset-password');
+        localStorage.setItem(FORGOT_TOKEN, JSON.stringify(response));
+        //Mail();
+        openNotification();
       })
       .catch(err => console.log(err.response));
   };

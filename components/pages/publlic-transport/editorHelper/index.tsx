@@ -41,7 +41,7 @@ export const EditorHelper = () => {
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     // ContentState.createFromBlockArray(JSON.parse(text));
     message.loading('Adding Post....', 1.3);
-    addPost({ title, userName, content, description })
+    addPost({ title, userName, content, description, image: userToken.userInfo.profileImage })
       .then(response => {
         console.log(response);
         const args = {
