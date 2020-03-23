@@ -11,6 +11,7 @@ import { useAuthToken } from 'providers/account';
 import { useState } from 'react';
 import { useAccountEditUser } from 'api/myApis';
 import { UserProfile } from './update';
+import { SIGN_IN, FUEL_WISE, ABOUT, PUBLIC_TRANSPORT } from 'routes';
 //   import { UserOutline, DoubleLeftOutline } from '@ant-design/icons';
 
 const { confirm } = Modal;
@@ -104,7 +105,7 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.1 ? resolve : reject, 10);
           localStorage.removeItem(ACCESS_TOKEN_NAME);
-          routerD.push('/sign-in');
+          routerD.push(SIGN_IN);
         }).catch(() => console.log('Invalid'));
       },
       onCancel() {},
@@ -239,19 +240,19 @@ const MainLayout: React.SFC<Props> = ({ title, description, ogImage, url, router
               style={{ lineHeight: '64px', display: 'flex' }}
             >
               <MenuItem key={uuid()} className={asPath === '/fuel-wise' ? activeClass : ''}>
-                <Link href="/fuel-wise">
+                <Link href={FUEL_WISE}>
                   <a>FuelWise</a>
                 </Link>
               </MenuItem>
 
               <MenuItem key={uuid()} className={asPath === '/public-transport' ? activeClass : ''}>
-                <Link href="/public-transport">
+                <Link href={PUBLIC_TRANSPORT}>
                   <a>PublicTransport</a>
                 </Link>
               </MenuItem>
 
               <MenuItem key={uuid()} className={asPath === '/about' ? activeClass : ''}>
-                <Link href="/about">
+                <Link href={ABOUT}>
                   <a>About Us</a>
                 </Link>
               </MenuItem>

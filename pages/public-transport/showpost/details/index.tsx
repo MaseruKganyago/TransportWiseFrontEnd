@@ -6,6 +6,7 @@ import { stateToHTML } from 'draft-js-export-html';
 import { convertFromRaw } from 'draft-js';
 import { Button } from 'antd';
 import './styles.scss';
+import { ADD_POST } from 'routes';
 
 export default function ShowPost() {
   const { query } = useRouter();
@@ -18,7 +19,7 @@ export default function ShowPost() {
     return stateToHTML(convertFromRaw(JSON.parse(content)));
   };
   function handleRouteAdd() {
-    route.push('/public-transport/addpost');
+    route.push(ADD_POST);
   }
   console.log(query.id);
 

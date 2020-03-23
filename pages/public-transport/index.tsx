@@ -5,6 +5,7 @@ import '/node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import dynamic from 'next/dynamic';
 import { Button } from 'antd';
 import { useRouter } from 'next/router';
+import { ADD_POST } from 'routes';
 
 let EditorViewer;
 
@@ -16,7 +17,7 @@ export default function ShowPost() {
   const route = useRouter();
 
   function handleRouteAdd() {
-    route.push('/public-transport/addpost');
+    route.push(ADD_POST);
   }
 
   return (
